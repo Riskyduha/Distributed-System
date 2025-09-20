@@ -11,10 +11,10 @@ import socket
 def server_program():
     server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
     # Bind to all interfaces so other containers can reach the server
-    server_socket.bind(('0.0.0.0', 2222))  
+    server_socket.bind(('0.0.0.0', 4444))  
     
     server_socket.listen(1)
-    print("Server listening on 0.0.0.0:2222")
+    print("Server listening on 0.0.0.0:4444")
     conn, address = server_socket.accept()  
     print("Connection from:", address)
     

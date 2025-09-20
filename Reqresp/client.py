@@ -11,18 +11,21 @@ import socket
 def client_program():
     client_socket = socket.socket()  
     # Use docker compose service DNS name
-    client_socket.connect(('reqresp-server', 2222))  
+    client_socket.connect(('reqresp-server', 4444))  
     
     message = input("Enter message: ")  
     
     while message.lower().strip() != 'bye':
-        print(type(message.encode()))
-        client_socket.send(message.encode())  
-        data = client_socket.recv(1024).decode()  
-    
-        print('Received from server:', data)  
-        
-        message = input("Enter another message: ")  
+        try:
+            client_socket.send(message.encode())
+            data = client_socket.recv(1024).decode()
+        except (BrokenPipeError, ConnectionResetError, ConnectionAbortedError) as e:
+            print('Connection error:', e)
+            break
+
+        print('Received from server:', data)
+
+        message = input("Enter another message: ")
     
     client_socket.close()
 
