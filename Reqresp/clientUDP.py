@@ -12,10 +12,10 @@ import socket
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 
 # Server address
-server_address = ('localhost', 12346)
+server_address = ('reqresp-server-udp', 12346)  # sebelumnya 'localhost'
 
 # Send data to server
-message = "halo john"
+message = "halo KIKI"
 client_socket.sendto(message.encode('utf-8'), server_address)
 
 # Receive response from server
